@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         r/place templater
+// @name         r/place HypixelPlace Overlay
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  try to take over the canvas! Made by r/httyd
@@ -7,16 +7,15 @@
 // @match        https://hot-potato.reddit.com/embed*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
 // @grant        GM_xmlhttpRequest
-// @connect      dotwildcard.com
+// @connect      github.com
 // ==/UserScript==
-
 (() => {
     // OTHER MEMBERS OF R/PLACE:
     // Change the following URL to your own transparent PNG template.
     // Make sure the above @connect comment points to your domain.
     // Multiple copies of this script can be used at the same time.
     // The overlay should update live if you update the image on your server.
-    const URL = "https://dotwildcard.com/img/toothless_full.png";
+    const URL = "https://github.com/Antonio32A/HypixelPlace/raw/main/overlay.png";
 
     const getData = async () => {
         const blob = new Blob([new Uint8Array(await new Promise(resolve =>

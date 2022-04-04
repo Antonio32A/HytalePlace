@@ -1,36 +1,21 @@
-# httyd-place
+# HypixelPlace
+Used for the HypixelPlace overlay.
 
-I made this repository because I wanted multiple people to be able to update the r/place template image(s) and script
-
-## HOW TO USE THE TEMPLATE AND SCRIPT ON /r/place
-Our friends at r/osuplace have made an overlay script! Use this to make sure you're placing pixels in the right spot.
+**Credits to r/osuplace and r/httyd for the script.**
 
 ### Extension
+- [Chrome/Opera](https://chrome.go)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 
-USE THIS FOR CHROME/OPERA
-[https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en]
+### Usage
+- Install the extension for your browser.
+- [Install the userscript](https://github.com/Antonio32A/HypixelPlace/raw/main/userscript.user.js)
 
-USE THIS FOR FIREFOX
-[https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/]
+## To edit the overlay:
+- Press `.` on your keyboard while logged in.
+- Drag the file onto the `Explorer` tab.
+- Click on `Replace`.
+- Go to the `Source Control` tab.
+- Type a message explaining the changes.
+- Click on `Commit and Push` checkmark on the top.
 
-### Userscript
-
-Install userscript.user.js from this repository to the addons listed above. Usually you can do that just by clicking the script, then clicking the VIEW RAW button in the upper right and the addon will detect the script.
-
-(If you're having trouble installing, check out this video to manually install the userscript [https://discord.com/channels/205770721085882370/958878173871886397/959513509102764033])
-
-## Coordination Efforts
-
-We're coordinating at [https://discord.gg/httyd] channel #httyd-place and on [https://reddit.com/r/httyd]
-
-## To edit the template:
-
-Edit the [toothless_full.png](toothless_full.png) file without changing the pixel dimensions. PR only:
-
-* YOUR EDITED toothless_full.png
-
-Merge it!
-
-## NOTICE
-
-toothless_template.png is no longer used as the updated script performs dithering in the browser now. Please do not use this file. It is being kept for backwards compatibility for now.
