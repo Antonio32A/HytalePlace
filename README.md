@@ -13,9 +13,9 @@ Used for the HypixelPlace overlay.
 
 ## To edit the overlay:
 - Press `.` on your keyboard while logged in.
+- Rename the file to `overlay.png` on your computer.
 - Drag the file onto the `Explorer` tab.
 - Click on `Replace`.
 - Go to the `Source Control` tab.
 - Type a message explaining the changes.
 - Click on `Commit and Push` checkmark on the top.
-
