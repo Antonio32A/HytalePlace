@@ -7,11 +7,11 @@ Used for the HypixelPlace overlay.
 - [Chrome/Opera](https://chrome.go)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 
-### Usage
+## Usage
 - Install the extension for your browser.
 - [Install the userscript](https://github.com/Antonio32A/HypixelPlace/raw/main/userscript.user.js)
 
-## To edit the overlay:
+## To edit the overlay (Organisers only)
 - Press `.` on your keyboard while logged in.
 - Rename the file to `overlay.png` on your computer.
 - Drag the file onto the `Explorer` tab.

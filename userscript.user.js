@@ -7,7 +7,7 @@
 // @match        https://hot-potato.reddit.com/embed*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
 // @grant        GM_xmlhttpRequest
-// @connect      github.com
+// @connect      githubusercontent.com
 // ==/UserScript==
 (() => {
     // OTHER MEMBERS OF R/PLACE:
@@ -15,7 +15,7 @@
     // Make sure the above @connect comment points to your domain.
     // Multiple copies of this script can be used at the same time.
     // The overlay should update live if you update the image on your server.
-    const URL = "https://github.com/Antonio32A/HypixelPlace/raw/main/overlay.png";
+    const URL = "https://raw.githubusercontent.com/Antonio32A/HypixelPlace/main/overlay.png";
 
     const getData = async () => {
         const blob = new Blob([new Uint8Array(await new Promise(resolve =>
