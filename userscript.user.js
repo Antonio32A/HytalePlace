@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -103,10 +103,7 @@ const changePriority = async () => {
 
 const update = async () => {
     metadata = await fetchMetadata();
-    console.log("Fetched metadata!");
-    console.log(metadata);
     const newImageDatas = await fetchImages();
-    console.log("Fetchedf images!");
     const newOverlay = await createImageElement(newImageDatas);
     if (overlayElement) {
         overlayElement.remove();
@@ -242,13 +239,11 @@ const fetchImages = async () => {
         return { name: overlay.name, blob: await getBlobAsImageData(blob) };
     });
 
-    console.log("Fetching images...");
     const overlays = await Promise.all(promises);
     const result = {};
     for (let overlay of overlays) {
         result[overlay.name] = overlay.blob;
     }
-    console.log(result);
     return result;
 };
 
