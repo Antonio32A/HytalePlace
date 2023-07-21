@@ -20,6 +20,8 @@ Userscript that previews an overlay over the r/Place canvas. Comes with an optio
 ## Autoplace
 Autoplace will place pixels for you. To activate it press P on your keyboard.
 
+Pressing O will switch autoplace priority. Current defaults to Hytale.
+
 **WARNING**: Autoplace is use at your own risk. It attempts to mimic human behavior but I do not guarantee that you will not get rate-limited. 
 (As far as I know reddit will not fully ban your account and will just force you to wait a long long time before placing)
 
