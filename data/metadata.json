@@ -2,15 +2,15 @@
     "overlays": [
         {
             "name": "Hytale",
-            "image": "https://rplace.antonio32a.com/hytale-outline.png",
-            "x": 1280,
-            "y": 372
+            "image": "https://rplace.antonio32a.com/hytale.png",
+            "x": 1211,
+            "y": 357
         },
         {
-            "name": "Hypixel",
-            "image": "https://rplace.antonio32a.com/hypixel-birthday.png",
-            "x": 1215,
-            "y": 142
+            "name": "Calamity",
+            "image": "https://rplace.antonio32a.com/calamity.png",
+            "x": 1182,
+            "y": 357
         }
     ]
 }
