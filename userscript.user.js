@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -127,6 +127,18 @@ const attemptPlacingPixel = async () => {
     colorPicker.selectColor(targetColor.index);
     // It takes a bit for the pixel to actually apply, so we wait a bit before confirming
     await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // TODO Make this only check for one pixel, not the whole image
+    const newPixels = findMismatchedPixels(imageData);
+    const pixelAlreadyPlaced = newPixels.some(pixel =>
+        pixel.x === randomPixel.x && pixel.y === randomPixel.y && pixel.currentColor === randomPixel.targetColor
+    );
+
+    if (pixelAlreadyPlaced) {
+        showMessage("Pixel was already placed by someone else! Trying again...", 1000);
+        return;
+    }
+
     colorPicker.confirmPixel();
 };
 
