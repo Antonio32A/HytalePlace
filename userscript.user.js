@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.7
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -76,6 +76,10 @@ const COLORS = {
     0x000000: {
         name: "Black",
         index: 27
+    },
+    0x898D90: {
+        name: "Gray",
+        index: 29
     },
     0xD4D7D9: {
         name: "Light Gray",
