@@ -5,6 +5,7 @@
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
+// @license      MIT
 // @match        https://garlic-bread.reddit.com/embed*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hytale.com
 // @require      https://cdn.jsdelivr.net/npm/toastify-js
