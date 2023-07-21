@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -15,7 +15,7 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @resource     TOASTIFY_STYLE https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css
-// @connect      githubusercontent.com
+// @connect      rplace.antonio32a.com
 // ==/UserScript==
 
 const METADATA_URL = "https://rplace.antonio32a.com/metadata.json";
