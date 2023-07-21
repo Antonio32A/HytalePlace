@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -18,11 +18,11 @@
 // @connect      githubusercontent.com
 // ==/UserScript==
 
-const METADATA_URL = "https://raw.githubusercontent.com/Antonio32A/HytalePlace/main/metadata.json";
+const METADATA_URL = "https://rplace.antonio32a.com/metadata.json";
 
 let metadata;
-let overlay;
-let imageData;
+let overlayElement;
+let imageDatas;
 
 const COLORS = {
     0xFF4500: {
@@ -78,8 +78,11 @@ const onReady = async () => {
     setInterval(attemptPlacingPixel, 3000);
 
     window.addEventListener("keypress", event => {
-        if (event.key !== "p") return;
-        toggleAutoplace();
+        if (event.key === "p") {
+            toggleAutoplace();
+        } else if (event.key === "o") {
+            changePriority();
+        }
     });
 };
 
@@ -89,22 +92,34 @@ const toggleAutoplace = async () => {
     showMessage("Autoplace is now " + (newState ? "enabled" : "disabled"), 2000);
 };
 
+const changePriority = async () => {
+    const current = await GM_getValue("mainOverlay", metadata.overlays[0].name);
+    const currentIndex = metadata.overlays.findIndex(overlay => overlay.name === current);
+    const nextIndex = (currentIndex + 1) % metadata.overlays.length;
+    const next = metadata.overlays[nextIndex].name;
+    await GM_setValue("mainOverlay", next);
+    showMessage(`Set ${next} as the priority overlay`, 2000);
+};
+
 const update = async () => {
     metadata = await fetchMetadata();
-    const newImageData = await fetchImage();
-    const newOverlay = await createImageElement(newImageData);
-    if (overlay) {
-        overlay.remove();
+    console.log("Fetched metadata!");
+    console.log(metadata);
+    const newImageDatas = await fetchImages();
+    console.log("Fetchedf images!");
+    const newOverlay = await createImageElement(newImageDatas);
+    if (overlayElement) {
+        overlayElement.remove();
     }
 
-    overlay = newOverlay;
-    imageData = newImageData;
-    getCanvasContainerElement().appendChild(overlay);
+    overlayElement = newOverlay;
+    imageDatas = newImageDatas;
+    getCanvasContainerElement().appendChild(overlayElement);
 };
 
 const attemptPlacingPixel = async () => {
     if (!(await GM_getValue("autoplace", false))) return;
-    const mismatchedPixels = findMismatchedPixels(imageData);
+    const mismatchedPixels = await findMismatchedPixels(imageDatas);
     if (mismatchedPixels.length === 0) {
         showMessage("No mismatched pixels found!", 1000);
         return;
@@ -129,7 +144,7 @@ const attemptPlacingPixel = async () => {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     // TODO Make this only check for one pixel, not the whole image
-    const newPixels = findMismatchedPixels(imageData);
+    const newPixels = await findMismatchedPixels(imageDatas);
     const pixelAlreadyPlaced = newPixels.some(pixel =>
         pixel.x === randomPixel.x && pixel.y === randomPixel.y && pixel.currentColor === randomPixel.targetColor
     );
@@ -142,13 +157,18 @@ const attemptPlacingPixel = async () => {
     colorPicker.confirmPixel();
 };
 
-const createImageElement = async image => {
-    const dithered = applyDitherEffect(image);
+const createImageElement = async images => {
     const canvas = getCanvasElement();
     const tempCanvas = document.createElement("canvas");
     tempCanvas.width = canvas.width * 3;
     tempCanvas.height = canvas.height * 3;
-    tempCanvas.getContext("2d").putImageData(dithered, metadata.x * 3, metadata.y * 3);
+
+    for (let name of Object.keys(images)) {
+        const overlay = metadata.overlays.find(overlay => overlay.name === name);
+        const image = images[name];
+        const dithered = applyDitherEffect(image);
+        tempCanvas.getContext("2d").putImageData(dithered, overlay.x * 3, overlay.y * 3);
+    }
 
     const dataURL = tempCanvas.toDataURL();
     const imageElement = document.createElement("img");
@@ -163,28 +183,37 @@ const createImageElement = async image => {
     return imageElement;
 };
 
-const findMismatchedPixels = imageData => {
+const findMismatchedPixels = async imageDatas => {
     const result = [];
+    const mainOverlay = await getMainOverlay();
+
     const ctx = getCanvasElement().getContext("2d");
-    const currentCanvasImage = ctx.getImageData(metadata.x, metadata.y, imageData.width, imageData.height);
-    for (let i = 0; i < currentCanvasImage.data.length; i += 4) {
-        const targetAlpha = imageData.data[i + 3];
-        if (targetAlpha !== 255) continue;
+    const prioritizedOverlays = metadata.overlays.sort(o => o.name === mainOverlay.name ? -1 : 1);
 
-        const targetRed = imageData.data[i];
-        const targetGreen = imageData.data[i + 1];
-        const targetBlue = imageData.data[i + 2];
-        const targetColor = COLORS[(targetRed << 16) + (targetGreen << 8) + targetBlue];
+    for (let overlay of prioritizedOverlays) {
+        const imageData = imageDatas[overlay.name];
+        const currentCanvasImage = ctx.getImageData(overlay.x, overlay.y, imageData.width, imageData.height);
+        for (let i = 0; i < currentCanvasImage.data.length; i += 4) {
+            const targetAlpha = imageData.data[i + 3];
+            if (targetAlpha !== 255) continue;
 
-        const currentRed = currentCanvasImage.data[i];
-        const currentGreen = currentCanvasImage.data[i + 1];
-        const currentBlue = currentCanvasImage.data[i + 2];
-        const currentColor = COLORS[(currentRed << 16) + (currentGreen << 8) + currentBlue];
+            const targetRed = imageData.data[i];
+            const targetGreen = imageData.data[i + 1];
+            const targetBlue = imageData.data[i + 2];
+            const targetColor = COLORS[(targetRed << 16) + (targetGreen << 8) + targetBlue];
 
-        if (currentColor === targetColor) continue;
-        const x = metadata.x + (i / 4) % imageData.width;
-        const y = metadata.y + Math.floor(i / 4 / imageData.width);
-        result.push({ x, y, targetColor, currentColor });
+            const currentRed = currentCanvasImage.data[i];
+            const currentGreen = currentCanvasImage.data[i + 1];
+            const currentBlue = currentCanvasImage.data[i + 2];
+            const currentColor = COLORS[(currentRed << 16) + (currentGreen << 8) + currentBlue];
+
+            if (currentColor === targetColor) continue;
+            const x = overlay.x + (i / 4) % imageData.width;
+            const y = overlay.y + Math.floor(i / 4 / imageData.width);
+            result.push({ x, y, targetColor, currentColor });
+        }
+
+        if (result.length > 0) break;
     }
 
     return result;
@@ -198,18 +227,34 @@ const getDataURL = blob => new Promise(resolve => {
 
 const blockUntilLoaded = image => new Promise(resolve => image.onload = resolve);
 
-const fetchImage = async () => {
-    const bytes = await new Promise(resolve =>
-        GM_xmlhttpRequest({
-            method: "GET",
-            url: metadata.image,
-            responseType: "arraybuffer",
-            headers: { "Cache-Control": "no-cache" },
-            onload: response => resolve(response.response)
-        })
-    );
-    const blob = new Blob([new Uint8Array(bytes)], { type: "image/png" });
-    return await getBlobAsImageData(blob);
+const fetchImages = async () => {
+    const promises = metadata.overlays.map(async overlay => {
+        const bytes = await new Promise(resolve =>
+            GM_xmlhttpRequest({
+                method: "GET",
+                url: overlay.image,
+                responseType: "arraybuffer",
+                headers: { "Cache-Control": "no-cache" },
+                onload: response => resolve(response.response)
+            })
+        );
+        const blob = new Blob([new Uint8Array(bytes)], { type: "image/png" });
+        return { name: overlay.name, blob: await getBlobAsImageData(blob) };
+    });
+
+    console.log("Fetching images...");
+    const overlays = await Promise.all(promises);
+    const result = {};
+    for (let overlay of overlays) {
+        result[overlay.name] = overlay.blob;
+    }
+    console.log(result);
+    return result;
+};
+
+const getMainOverlay = async () => {
+    const name = await GM_getValue("mainOverlay", metadata.overlays[0].name);
+    return metadata.overlays.find(overlay => overlay.name === name);
 };
 
 const fetchMetadata = async () => new Promise(resolve =>
