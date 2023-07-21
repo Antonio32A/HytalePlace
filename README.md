@@ -31,3 +31,31 @@ Autoplace will place pixels for you. To activate it press P on your keyboard.
 - Go to the `Source Control` tab.
 - Type a message explaining the changes.
 - Click on `Commit and Push` checkmark on the top.
+
+
+
+
+# HytalePlace (Turkish Translation)
+r/Place üzerinde Hytale logosunun yerini göstermek için bir kullanıcı betiği. Opsiyonel bir otomatik piksel yerleştirme eklentisiyle birlikte.
+
+
+**r/osuplace ve r/httyd'ye betiğin v0 versiyonunda yardım ettiği için teşekkürler.**
+
+### Betiği Çalıştırmak İçin Gerekli Tarayıcı Eklentisi
+- [Chrome/Opera](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
+
+## Kurulum
+- Kullandığınız tarayıcıya göre gerekli eklentiyi kurun.
+- [Kullanıcı Betiğini Bu Yazıya Tıklayarak Açılan Pencerede Kurun](https://github.com/Antonio32A/HytalePlace/raw/main/userscript.user.js)
+![Kurulum İçin Resimli Anlatı](.github/images/install.png)
+
+## Kullanım
+- Kurduktan sonra r/Place'e gidin, logonun tam halini sayfadan tamamen uzaklaştırdığınız zaman göreceksiniz. Yakınlaştırdığınız zaman ise pikselleri nereye koyacağınızı gösteren bir yardımcı halinde yarı saydam gözükecek.
+- Otomatik yerleştirmeyi aktif etmek için klavyenizden "P" tuşuna basın.
+
+## Otomatik Yerleştirme
+Otomatik yerleştirme sizin yerinize piskelleri koyacaktır. Aktive etmek için "P" tuşuna basın.
+
+**UYARI**: Otomatik yerleştirme hala geliştirilme aşamasındadır, lütfen Reddit'in sizi kıstlayabileceği ihtimalini bilerek kullanınız. İnsan davranışını taklit etmeye çalışır, ama Reddit'İn sizin piksel yerleştirmenizi kısıtlayabileceğini unutmayınız, size herhangi bir garanti veremeyeceğim. 
+(Bildiğim kadarıyla Reddit sizin hesabınızı direkt olarak banlamıyor, sadece piksel yerleştimenize kısıtlama uyguluyor. Çok daha uzun süreler beklemek durumunda oluyorsunuz)
