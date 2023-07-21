@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -116,15 +116,15 @@ const update = async () => {
 
 const attemptPlacingPixel = async () => {
     if (!(await GM_getValue("autoplace", false))) return;
-    const mismatchedPixels = await findMismatchedPixels(imageDatas);
-    if (mismatchedPixels.length === 0) {
-        showMessage("No mismatched pixels found!", 1000);
-        return;
-    }
-
     const nextTileAvailableIn = getStatusPillElement().nextTileAvailableIn;
     if (nextTileAvailableIn > 0) {
         showMessage("Next tile available in " + nextTileAvailableIn + " seconds", 1000);
+        return;
+    }
+
+    const mismatchedPixels = await findMismatchedPixels(imageDatas);
+    if (mismatchedPixels.length === 0) {
+        showMessage("No mismatched pixels found!", 1000);
         return;
     }
 
@@ -138,7 +138,7 @@ const attemptPlacingPixel = async () => {
     const colorPicker = getColorPickerElement();
     colorPicker.selectColor(targetColor.index);
     // It takes a bit for the pixel to actually apply, so we wait a bit before confirming
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     // TODO Make this only check for one pixel, not the whole image
     const newPixels = await findMismatchedPixels(imageDatas);
@@ -152,6 +152,7 @@ const attemptPlacingPixel = async () => {
     }
 
     colorPicker.confirmPixel();
+    setTimeout(() => location.reload(), 10000);
 };
 
 const createImageElement = async images => {
