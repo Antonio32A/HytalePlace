@@ -11,6 +11,7 @@ Userscript that previews an overlay over the r/Place canvas. Comes with an optio
 ## Installation
 - Install the extension for your browser.
 - [Install the userscript](https://github.com/Antonio32A/HytalePlace/raw/main/userscript.user.js)
+![](https://i.antonio32a.com/%F0%9F%98%B8%F0%9F%98%BF%F0%9F%90%88%F0%9F%98%BC%F0%9F%98%B8%F0%9F%98%BF%F0%9F%98%B9%F0%9F%98%BA%F0%9F%98%BF%F0%9F%90%B1.png)
 
 ## Usage
 - After installing visit r/Place and you will see the overlay.
