@@ -3,38 +3,20 @@
         {
             "name": "Hytale",
             "image": "https://rplace.antonio32a.com/hytale.png",
-            "x": 1205,
-            "y": 344
+            "x": 1509,
+            "y": 470
         },
         {
-            "name": "Echo",
-            "image": "https://rplace.antonio32a.com/echo.png",
-            "x": 1226,
-            "y": 344
+            "name": "Terraria",
+            "image": "https://rplace.antonio32a.com/terraria.png",
+            "x": 1528,
+            "y": 469
         },
         {
-            "name": "Ficsit",
-            "image": "https://rplace.antonio32a.com/ficsit.png",
-            "x": 1226,
-            "y": 355
-        },
-        {
-            "name": "Piano",
-            "image": "https://rplace.antonio32a.com/piano.png",
-            "x": 1205,
-            "y": 369
-        },
-        {
-            "name": "Rocket League Esports",
-            "image": "https://rplace.antonio32a.com/rocketleague.png",
-            "x": 1229,
-            "y": 369
-        },
-        {
-            "name": "Duck",
-            "image": "https://rplace.antonio32a.com/duck.png",
-            "x": 1221,
-            "y": 366
+            "name": "Pufferfish",
+            "image": "https://rplace.antonio32a.com/pufferfish.png",
+            "x": 1501,
+            "y": 471
         }
     ]
 }
