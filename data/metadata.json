@@ -17,6 +17,18 @@
             "image": "https://rplace.antonio32a.com/pufferfish.png",
             "x": 1501,
             "y": 471
+        },
+        {
+            "name": "BitCraft",
+            "image": "https://rplace.antonio32a.com/bitcraft.png",
+            "x": 1552,
+            "y": 475
+        },
+        {
+            "name": "Kweebec",
+            "image": "https://rplace.antonio32a.com/kweebec.png",
+            "x": 1498,
+            "y": 480
         }
     ]
 }
