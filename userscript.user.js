@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.7
+// @version      1.8
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -104,6 +104,7 @@ if (window.top !== window.self) {
 }
 
 const onReady = async () => {
+    console.log("Loading r/place overlay...")
     GM_addStyle(GM_getResourceText("TOASTIFY_STYLE"));
     await update();
     setInterval(update, 60 * 1000);
@@ -116,6 +117,7 @@ const onReady = async () => {
             changePriority();
         }
     });
+    console.log("Loaded r/place overlay.")
 };
 
 const toggleAutoplace = async () => {
@@ -227,19 +229,31 @@ const findMismatchedPixels = async imageDatas => {
             const targetAlpha = imageData.data[i + 3];
             if (targetAlpha !== 255) continue;
 
+            const x = overlay.x + (i / 4) % imageData.width;
+            const y = overlay.y + Math.floor(i / 4 / imageData.width);
+
             const targetRed = imageData.data[i];
             const targetGreen = imageData.data[i + 1];
             const targetBlue = imageData.data[i + 2];
-            const targetColor = COLORS[(targetRed << 16) + (targetGreen << 8) + targetBlue];
+            const rawTargetColor = (targetRed << 16) + (targetGreen << 8) + targetBlue;
+            const targetColor = COLORS[rawTargetColor];
+            if (targetColor === undefined) {
+                showMessage(`Unknown overlay color ${rawTargetColor} at (${x}, ${y})! Please report this to the script author.`, 10000);
+                return [];
+            }
 
             const currentRed = currentCanvasImage.data[i];
             const currentGreen = currentCanvasImage.data[i + 1];
             const currentBlue = currentCanvasImage.data[i + 2];
-            const currentColor = COLORS[(currentRed << 16) + (currentGreen << 8) + currentBlue];
+            const rawCurrentColor = (currentRed << 16) + (currentGreen << 8) + currentBlue;
+            const currentColor = COLORS[rawCurrentColor];
+
+            if (currentColor === undefined) {
+                showMessage(`Unknown canvas color ${rawCurrentColor} at (${x}, ${y})! Please report this to the script author.`, 10000);
+                return [];
+            }
 
             if (currentColor === targetColor) continue;
-            const x = overlay.x + (i / 4) % imageData.width;
-            const y = overlay.y + Math.floor(i / 4 / imageData.width);
             result.push({ x, y, targetColor, currentColor });
         }
 
