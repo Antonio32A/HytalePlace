@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.11
+// @version      1.12
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -26,6 +26,10 @@ let imageDatas;
 
 
 const COLORS = {
+    0x6D001A: {
+        name: "Burgundy",
+        index: 0
+    },
     0xBE0039: {
         name: "Dark Red",
         index: 1
@@ -41,6 +45,10 @@ const COLORS = {
     0xFFD635: {
         name: "Yellow",
         index: 4
+    },
+    0xFFF8B8: {
+        name: "Pale Yellow",
+        index: 5
     },
     0x00A368: {
         name: "Dark Green",
@@ -62,6 +70,10 @@ const COLORS = {
         name: "Teal",
         index: 10
     },
+    0x00CCC0: {
+        name: "Light Teal",
+        index: 11
+    },
     0x2450A4: {
         name: "Dark Blue",
         index: 12
@@ -82,6 +94,10 @@ const COLORS = {
         name: "Periwinkle",
         index: 16
     },
+    0x94B3FF: {
+        name: "Lavender",
+        index: 17
+    },
     0x811E9F: {
         name: "Dark Purple",
         index: 18
@@ -89,6 +105,14 @@ const COLORS = {
     0xB44AC0: {
         name: "Purple",
         index: 19
+    },
+    0xE4ABFF: {
+        name: "Pale Purple",
+        index: 20
+    },
+    0xDE107F: {
+        name: "Magenta",
+        index: 21
     },
     0xFF3881: {
         name: "Pink",
@@ -106,9 +130,17 @@ const COLORS = {
         name: "Brown",
         index: 25
     },
+    0xFFB470: {
+        name: "Beige",
+        index: 26
+    },
     0x000000: {
         name: "Black",
         index: 27
+    },
+    0x515252: {
+        name: "Dark Gray",
+        index: 28
     },
     0x898D90: {
         name: "Gray",
