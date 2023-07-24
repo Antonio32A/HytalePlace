@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.11
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
