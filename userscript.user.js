@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         r/place Hytale Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.8
+// @version      1.1
 // @description  r/place overlay with an autoplacer.
 // @author       Antonio32A
 // @credits      oralekin, exdeejay (xDJ_), 101arrowz
@@ -24,7 +24,12 @@ let metadata;
 let overlayElement;
 let imageDatas;
 
+
 const COLORS = {
+    0xBE0039: {
+        name: "Dark Red",
+        index: 1
+    },
     0xFF4500: {
         name: "Red",
         index: 2
@@ -41,9 +46,21 @@ const COLORS = {
         name: "Dark Green",
         index: 6
     },
+    0x00CC78: {
+        name: "Green",
+        index: 7
+    },
     0x7EED56: {
         name: "Light Green",
         index: 8
+    },
+    0x00756F: {
+        name: "Dark Teal",
+        index: 9
+    },
+    0x009EAA: {
+        name: "Teal",
+        index: 10
     },
     0x2450A4: {
         name: "Dark Blue",
@@ -57,6 +74,14 @@ const COLORS = {
         name: "Light Blue",
         index: 14
     },
+    0x493AC1: {
+        name: "Indigo",
+        index: 15
+    },
+    0x6A5CFF: {
+        name: "Periwinkle",
+        index: 16
+    },
     0x811E9F: {
         name: "Dark Purple",
         index: 18
@@ -65,9 +90,17 @@ const COLORS = {
         name: "Purple",
         index: 19
     },
+    0xFF3881: {
+        name: "Pink",
+        index: 22
+    },
     0xFF99AA: {
         name: "Light Pink",
         index: 23
+    },
+    0x6D482F: {
+        name: "Dark Brown",
+        index: 24
     },
     0x9C6926: {
         name: "Brown",
